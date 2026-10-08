@@ -6,4 +6,53 @@ function filter(){var loc=document.getElementById('location').value.toLowerCase(
 document.querySelectorAll('.tab').forEach(function(t){t.onclick=function(){document.querySelectorAll('.tab').forEach(function(x){x.classList.remove('active')});t.classList.add('active');selectedPurpose=t.dataset.purpose||'';filter()}})
 document.querySelectorAll('.quick button').forEach(function(b){b.onclick=function(){document.getElementById('location').value=b.dataset.loc;filter()}})
 document.getElementById('searchBtn').onclick=filter;function openTool(name){var m=document.getElementById('toolModal'),t=document.getElementById('toolTitle'),b=document.getElementById('toolBody');m.style.display='flex';var box=function(label,id,ph){return '<label style="display:block;font-size:12px;font-weight:700;margin:10px 0 5px">'+label+'</label><input id="'+id+'" type="number" placeholder="'+ph+'" style="width:100%;padding:11px;border:1px solid #ddd;border-radius:8px">'};var btn='<button onclick="calcTool(\''+name+'\')" style="margin-top:14px;background:#d08a22;color:#fff;border:0;border-radius:8px;padding:11px 16px;font-weight:800">Calculate</button>';if(name==='emi'){t.textContent='Home Loan EMI';b.innerHTML=box('Loan Amount (₹)','v1','5000000')+box('Annual Interest (%)','v2','8.5')+box('Tenure (years)','v3','20')+btn}else if(name==='budget'){t.textContent='Property Budget Planner';b.innerHTML=box('Monthly Income (₹)','v1','100000')+box('Existing Monthly EMI (₹)','v2','10000')+box('Interest Rate (%)','v3','8.5')+box('Tenure (years)','v4','20')+btn}else if(name==='yield'){t.textContent='Rental Yield Calculator';b.innerHTML=box('Property Price (₹)','v1','5000000')+box('Monthly Rent (₹)','v2','20000')+btn}else if(name==='area'){t.textContent='Area Converter';b.innerHTML=box('Area (sq ft)','v1','1000')+btn}else if(name==='construction'){t.textContent='Construction Cost Estimator';b.innerHTML=box('Built-up Area (sq ft)','v1','1500')+box('Cost per sq ft (₹)','v2','2200')+btn}else if(name==='tenant'){t.textContent='Tenant & Owner Help';b.innerHTML='<ul><li>Verify identity and ownership documents.</li><li>Record rent, deposit, maintenance and utilities in writing.</li><li>Agree on notice and renewal terms.</li><li>Keep receipts and document copies.</li><li>Inspect property condition at handover.</li></ul>'}else if(name==='move'){t.textContent='Move & Relocate Guide';b.innerHTML='<ul><li>Confirm move-in date and access.</li><li>Plan electricity, water, internet and gas.</li><li>Record meter readings at handover.</li><li>Keep a moving inventory.</li><li>Update your address where necessary.</li></ul>'}else if(name==='guidance'){t.textContent='Property Guidance';b.innerHTML='<ul><li>Check ownership and title documents.</li><li>Verify approvals and dues where applicable.</li><li>Compare locality prices and rental rates.</li><li>Inspect construction, water, drainage and access.</li><li>Verify everything before paying an advance.</li></ul>'}else if(name==='agreement'){t.textContent='Rental Agreement Draft';b.innerHTML=box('Owner / Landlord Name','v1','Full name')+box('Tenant Name','v2','Full name')+box('Property Address','v3','Full property address')+box('Monthly Rent (₹)','v4','20000')+box('Security Deposit (₹)','v5','50000')+box('Agreement Start Date','v6','DD/MM/YYYY')+'<button onclick="generateAgreement()" style="margin-top:14px;background:#d08a22;color:#fff;border:0;border-radius:8px;padding:11px 16px;font-weight:800">Generate Draft</button>'}else{t.textContent='Property Visit Checklist';b.innerHTML='<ul style="line-height:2;padding-left:20px"><li>Verify ownership and documents</li><li>Check water, electricity and drainage</li><li>Inspect walls, flooring and seepage</li><li>Confirm parking and access</li><li>Compare quoted price with nearby properties</li><li>Ask about maintenance and pending dues</li></ul>'}}function generateAgreement(){var o=document.getElementById('v1').value||'________________';var t=document.getElementById('v2').value||'________________';var a=document.getElementById('v3').value||'________________';var rent=document.getElementById('v4').value||'________';var dep=document.getElementById('v5').value||'________';var date=document.getElementById('v6').value||'________';var draft='<div style="font-size:13px;line-height:1.7"><h4 style="text-align:center">RESIDENTIAL RENTAL AGREEMENT – DRAFT</h4><p>This draft records the proposed rental arrangement between the Landlord and Tenant for the residential property described below.</p><p><b>Landlord:</b> '+esc(o)+'<br><b>Tenant:</b> '+esc(t)+'<br><b>Property:</b> '+esc(a)+'<br><b>Monthly Rent:</b> ₹'+esc(rent)+'<br><b>Security Deposit:</b> ₹'+esc(dep)+'<br><b>Start Date:</b> '+esc(date)+'</p><p><b>Basic Terms:</b> The tenant shall use the premises for lawful residential purposes, pay rent on time, maintain the premises reasonably, and comply with mutually agreed conditions. The parties should separately agree on the term, notice period, utilities, maintenance, renewal and other applicable conditions.</p><p><b>Signatures:</b><br>Landlord: ____________________ &nbsp;&nbsp; Tenant: ____________________</p><p style="font-size:11px;color:#777">This is a general draft for convenience, not a substitute for legal advice or registration/stamp-duty requirements. Verify applicable Telangana requirements before signing.</p></div>';document.getElementById('toolBody').innerHTML=draft+'<button onclick="window.print()" style="margin-top:14px;background:#172033;color:#fff;border:0;border-radius:8px;padding:10px 14px;font-weight:800">Print / Save PDF</button>'}function closeTool(){document.getElementById('toolModal').style.display='none'}function calcTool(name){var a=Number(document.getElementById('v1').value)||0,b=Number(document.getElementById('v2').value)||0,c=Number(document.getElementById('v3').value)||0,d=Number(document.getElementById('v4')?.value)||0;var out='';if(name==='emi'){var r=b/1200,n=c*12;var emi=r? a*r*Math.pow(1+r,n)/(Math.pow(1+r,n)-1):a/n;out='Estimated EMI: ₹'+Math.round(emi).toLocaleString('en-IN')+' / month'}else if(name==='budget'){var r=c/1200,n=d*12,emi=Math.max(0,a*0.4-b),loan=r?emi*(Math.pow(1+r,n)-1)/(r*Math.pow(1+r,n)):emi*n;out='Indicative affordable loan: ₹'+Math.round(loan).toLocaleString('en-IN')}else if(name==='yield'){out='Estimated rental yield: '+((b*12/a)*100).toFixed(2)+'% per year'}else if(name==='area'){out='1000 sq ft = '+(a/9).toFixed(2)+' sq yd = '+(a*0.092903).toFixed(2)+' sq m'}else if(name==='construction'){out='Estimated construction cost: ₹'+Math.round(a*b).toLocaleString('en-IN')}document.getElementById('toolBody').insertAdjacentHTML('beforeend','<p style="margin-top:16px;font-weight:900;color:#b4761b">'+out+'</p>')}
-async function load(){try{var r=await fetch('https://public-api.wordpress.com/rest/v1.1/sites/wedealproperty.wordpress.com/posts/?number=100&status=publish');var data=await r.json();properties=(data.posts||[]).map(function(p){var text=(p.content||'').replace(/<[^>]+>/g,'\n').replace(/&nbsp;/g,' ');var get=function(k){var m=text.match(new RegExp(k+'\\s*:\\s*([^\\n<]+)','i'));return m?m[1].trim():''};var cats=Object.values(p.categories||{}).map(function(x){return typeof x==='string'?x:(x.name||'')});return{id:p.ID,title:p.title||'Property',location:get('Location'),purpose:get('Listing Type'),type:get('Property Type')||cats[0]||'',price:get('Price/Rent'),bhk:get('BHK'),area:get('Area'),furnishing:get('Furnishing'),description:get('Description'),url:p.URL||'#',image:p.featured_image||(p.post_thumbnail&&p.post_thumbnail.URL)||''}});render(properties)}catch(e){document.getElementById('cards').innerHTML='<div class="loading">Unable to load properties right now.</div>'}}load();
+async function load(){
+  try{
+    var r=await fetch('./data/properties.json?ts='+Date.now(),{cache:'no-store'});
+    var data=await r.json();
+    properties=(Array.isArray(data)?data:(data.properties||[])).map(function(p){
+      var photo=p.image||'';
+      if(!photo && p.photos){
+        photo=Array.isArray(p.photos)?(p.photos[0]||''):String(p.photos).split(/[,\n]/)[0].trim();
+      }
+      return {
+        id:p.id||p.submission_id||'',
+        title:String(p.title||'Property').trim()||'Property',
+        location:String(p.location||'Hyderabad').trim(),
+        purpose:String(p.listingType||p.listing_type||p.purpose||'').trim(),
+        type:String(p.propertyType||p.property_type||p.type||'').trim(),
+        price:String(p.price||p.price_or_rent||'').trim(),
+        bhk:String(p.bhk||'').trim(),
+        area:String(p.area||p.size_sq_ft||'').trim(),
+        furnishing:String(p.furnishing||'').trim(),
+        description:String(p.description||'').trim(),
+        url:p.url||'#',
+        image:photo,
+        phone:String(p.phone||'').trim(),
+        email:String(p.email||'').trim()
+      };
+    }).filter(function(p){return p.title!=='Property'||p.location||p.description||p.price||p.image});
+    render(properties);
+  }catch(e){
+    document.getElementById('cards').innerHTML='<div class="loading">Unable to load properties right now.</div>';
+  }
+}
+
+var menuBtn=document.querySelector('.menu-btn');
+var mobileNav=document.querySelector('.desktop-nav');
+if(menuBtn&&mobileNav){
+  menuBtn.setAttribute('aria-expanded','false');
+  menuBtn.onclick=function(){
+    var open=mobileNav.classList.toggle('mobile-open');
+    menuBtn.setAttribute('aria-expanded',open?'true':'false');
+    menuBtn.textContent=open?'✕':'☰';
+  };
+  mobileNav.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){
+      mobileNav.classList.remove('mobile-open');
+      menuBtn.setAttribute('aria-expanded','false');
+      menuBtn.textContent='☰';
+    });
+  });
+}
+load();
