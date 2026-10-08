@@ -1,0 +1,55 @@
+name: Update property listings
+
+on:
+  repository_dispatch:
+    types: [property_submitted]
+
+permissions:
+  contents: write
+
+jobs:
+  update-properties:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Update properties.json
+        env:
+          PAYLOAD: ${{ toJson(github.event.client_payload) }}
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const path = 'data/properties.json';
+          const payload = JSON.parse(process.env.PAYLOAD);
+          let properties = [];
+          if (fs.existsSync(path)) {
+            const text = fs.readFileSync(path, 'utf8').trim();
+            if (text) properties = JSON.parse(text);
+          }
+          const property = {
+            id: payload.id || String(Date.now()),
+            title: payload.title || '',
+            listingType: payload.listingType || '',
+            propertyType: payload.propertyType || '',
+            location: payload.location || '',
+            price: payload.price || '',
+            bhk: payload.bhk || '',
+            area: payload.area || '',
+            furnishing: payload.furnishing || '',
+            description: payload.description || '',
+            photos: payload.photos || '',
+            submittedAt: new Date().toISOString()
+          };
+          properties.push(property);
+          fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
+          NODE
+
+      - name: Commit property listing
+        run: |
+          git config user.name "WeDealProperty Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/properties.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Add property listing"
+          git push
