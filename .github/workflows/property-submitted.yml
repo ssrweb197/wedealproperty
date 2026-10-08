@@ -27,20 +27,29 @@ jobs:
             const text = fs.readFileSync(path, 'utf8').trim();
             if (text) properties = JSON.parse(text);
           }
+
+          const firstPhoto = Array.isArray(payload.photos)
+            ? (payload.photos[0] || '')
+            : String(payload.photos || '').split(/[,\n]/)[0].trim();
+
           const property = {
-            id: payload.id || String(Date.now()),
+            id: payload.id || payload.submission_id || String(Date.now()),
             title: payload.title || '',
-            listingType: payload.listingType || '',
-            propertyType: payload.propertyType || '',
+            listingType: payload.listing_type || payload.listingType || payload.purpose || '',
+            propertyType: payload.property_type || payload.propertyType || payload.type || '',
             location: payload.location || '',
-            price: payload.price || '',
+            price: payload.price_or_rent || payload.price || '',
             bhk: payload.bhk || '',
-            area: payload.area || '',
+            area: payload.size_sq_ft || payload.area || '',
             furnishing: payload.furnishing || '',
             description: payload.description || '',
             photos: payload.photos || '',
+            image: firstPhoto,
+            phone: payload.phone || '',
+            email: payload.email || '',
             submittedAt: new Date().toISOString()
           };
+
           properties.push(property);
           fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
           NODE
