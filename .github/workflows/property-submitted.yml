@@ -28,25 +28,40 @@ jobs:
             if (text) properties = JSON.parse(text);
           }
 
-          const firstPhoto = Array.isArray(payload.photos)
-            ? (payload.photos[0] || '')
-            : String(payload.photos || '').split(/[,\n]/)[0].trim();
+          const cleanKey = k => String(k || '').toLowerCase().replace(/[^a-z0-9]/g, '');
+          const all = Object.assign({}, payload, payload.answers || {}, payload.fields || {});
+          const pick = (...names) => {
+            for (const name of names) {
+              const wanted = cleanKey(name);
+              for (const [key, value] of Object.entries(all)) {
+                if (cleanKey(key) === wanted || cleanKey(key).includes(wanted)) {
+                  if (value !== undefined && value !== null && String(value).trim() !== '') return value;
+                }
+              }
+            }
+            return '';
+          };
+
+          const photoValue = pick('photos','photo','image','propertyphotos','propertyphotosuploadimagesofyourproperty');
+          const photoList = Array.isArray(photoValue)
+            ? photoValue
+            : String(photoValue || '').split(/[,\n]/).map(x => x.trim()).filter(Boolean);
 
           const property = {
-            id: payload.id || payload.submission_id || String(Date.now()),
-            title: payload.title || '',
-            listingType: payload.listing_type || payload.listingType || payload.purpose || '',
-            propertyType: payload.property_type || payload.propertyType || payload.type || '',
-            location: payload.location || '',
-            price: payload.price_or_rent || payload.price || '',
-            bhk: payload.bhk || '',
-            area: payload.size_sq_ft || payload.area || '',
-            furnishing: payload.furnishing || '',
-            description: payload.description || '',
-            photos: payload.photos || '',
-            image: firstPhoto,
-            phone: payload.phone || '',
-            email: payload.email || '',
+            id: pick('id','submissionid') || String(Date.now()),
+            title: pick('title','propertytitle'),
+            listingType: pick('listingtype','listing_type','purpose','propertylistingtype'),
+            propertyType: pick('propertytype','property_type','type'),
+            location: pick('location','locationareaorcity','locationareacity'),
+            price: pick('priceorrent','price_or_rent','price','expectedpriceormonthlyrentinlocalcurrency'),
+            bhk: pick('bhk','bedrooms','numberofbedroomsifapplicable'),
+            area: pick('size_sq_ft','areasqft','area','propertysize'),
+            furnishing: pick('furnishing','furnishingstatus'),
+            description: pick('description','propertydescription'),
+            photos: photoList,
+            image: photoList[0] || '',
+            phone: pick('phone','phonenumber'),
+            email: pick('email','emailaddress'),
             submittedAt: new Date().toISOString()
           };
 
@@ -60,5 +75,5 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/properties.json
           git diff --cached --quiet && exit 0
-          git commit -m "Add property listing"
+          git commit -m "Improve Jotform property field mapping"
           git push
