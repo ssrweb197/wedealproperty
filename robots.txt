@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ssrweb197.github.io/wedealproperty/sitemap.xml
