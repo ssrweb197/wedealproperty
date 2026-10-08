@@ -1,0 +1,37 @@
+name: Save Property Image
+
+on:
+  repository_dispatch:
+    types: [property_image]
+
+permissions:
+  contents: write
+
+jobs:
+  save-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download property image
+        env:
+          IMAGE_URL: ${{ github.event.client_payload.image_url }}
+          IMAGE_NAME: ${{ github.event.client_payload.image_name }}
+        run: |
+          test -n "$IMAGE_URL"
+          mkdir -p images
+          NAME="$IMAGE_NAME"
+          if [ -z "$NAME" ]; then NAME="property-${{ github.run_id }}.jpg"; fi
+          NAME=$(echo "$NAME" | tr -cd 'A-Za-z0-9._-')
+          curl -L --fail --retry 3 "$IMAGE_URL" -o "images/$NAME"
+          test -s "images/$NAME"
+
+      - name: Commit image
+        run: |
+          git config user.name "WeDealProperty Bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add images/
+          git diff --cached --quiet && exit 0
+          git commit -m "Add property image"
+          git push
