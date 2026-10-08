@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://wedealproperty-mhxu.hatchable.site/sitemap.xml
