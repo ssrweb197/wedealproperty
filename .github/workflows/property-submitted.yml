@@ -69,10 +69,26 @@ jobs:
             return '';
           };
 
-          const photoValue = pick('photos', 'photo', 'image', 'propertyphotos', 'propertyphotosuploadimagesofyourproperty', 'q14_q14_fileupload12');
-          const photoList = Array.isArray(photoValue)
-            ? photoValue.map(x => typeof x === 'string' ? x : (x && (x.url || x.name)) || '').filter(Boolean)
-            : String(photoValue || '').split(/[,\n]/).map(x => x.trim()).filter(Boolean);
+          const photoValue = pick('photos', 'photo', 'image', 'propertyphotos', 'propertyphotosuploadimagesofyourproperty', 'q14_q14_fileupload12', 'fileupload12');
+          const photoList = [];
+          const addPhotoUrls = (value, depth = 0) => {
+            if (value == null || depth > 10) return;
+            if (Array.isArray(value)) { value.forEach(v => addPhotoUrls(v, depth + 1)); return; }
+            if (typeof value === 'object') {
+              for (const key of ['url', 'download_url', 'downloadUrl', 'file_url', 'fileUrl', 'answer', 'value', 'files']) {
+                if (value[key] !== undefined) addPhotoUrls(value[key], depth + 1);
+              }
+              return;
+            }
+            const matches = String(value).trim().match(/https?:\/\/[^\s"'<>]+/gi) || [];
+            for (const url of matches) {
+              if (/jotform\.com\/uploads\//i.test(url) || /\.(jpe?g|png|webp|gif)(?:[?#]|$)/i.test(url)) photoList.push(url.replace(/[),;]+$/, ''));
+            }
+          };
+          addPhotoUrls(photoValue);
+          // Fallback for Zoho tokens that serialize the URL under an unexpected field name.
+          if (!photoList.length) addPhotoUrls(payload);
+          const uniquePhotos = [...new Set(photoList)];
 
           const property = {
             id: pick('id', 'submissionid', 'submissionID'),
@@ -85,8 +101,8 @@ jobs:
             area: pick('size_sq_ft', 'areasqft', 'area', 'propertysize', 'q10_q10_number8'),
             furnishing: pick('furnishing', 'furnishingstatus', 'q12_q12_radio10'),
             description: pick('description', 'propertydescription', 'q13_q13_textarea11'),
-            photos: photoList,
-            image: photoList[0] || '',
+            photos: uniquePhotos,
+            image: uniquePhotos[0] || '',
             phone: pick('phone', 'phonenumber', 'q3_q3_phone1'),
             email: pick('email', 'emailaddress', 'q4_q4_email2'),
             submittedAt: new Date().toISOString()
@@ -105,7 +121,9 @@ jobs:
             title: property.title,
             location: property.location,
             hasPhone: Boolean(String(property.phone || '').trim()),
-            hasEmail: Boolean(String(property.email || '').trim())
+            hasEmail: Boolean(String(property.email || '').trim()),
+            photoCount: uniquePhotos.length,
+            photoFieldType: Array.isArray(photoValue) ? 'array' : typeof photoValue
           }));
           NODE
 
