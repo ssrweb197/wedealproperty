@@ -33,6 +33,7 @@ async function load(){
         email:String(p.email||'').trim()
       };
     }).filter(function(p){return (p.title && p.title!=='Property')||p.description||p.price||p.image||p.area||p.bhk||p.furnishing||p.type||p.purpose||p.phone||p.email});
+    properties.sort(function(a,b){var ta=Date.parse(a.submittedAt||a.submitted_at||'')||Number(a.id)||0;var tb=Date.parse(b.submittedAt||b.submitted_at||'')||Number(b.id)||0;return tb-ta;});
     render(properties);var propertyId=new URLSearchParams(location.search).get('property');if(propertyId)viewProperty(propertyId);
   }catch(e){
     document.getElementById('cards').innerHTML='<div class="loading">Unable to load properties right now.</div>';
