@@ -32,7 +32,7 @@ async function load(){
         phone:String(p.phone||'').trim(),
         email:String(p.email||'').trim()
       };
-    }).filter(function(p){return p.title!=='Property'||p.location||p.description||p.price||p.image});
+    }).filter(function(p){return (p.title && p.title!=='Property')||p.description||p.price||p.image||p.area||p.bhk||p.furnishing||p.type||p.purpose||p.phone||p.email});
     render(properties);var propertyId=new URLSearchParams(location.search).get('property');if(propertyId)viewProperty(propertyId);
   }catch(e){
     document.getElementById('cards').innerHTML='<div class="loading">Unable to load properties right now.</div>';
