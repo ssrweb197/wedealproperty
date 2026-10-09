@@ -69,7 +69,7 @@ jobs:
             return '';
           };
 
-          const photoValue = pick('photos', 'photo', 'image', 'propertyphotos', 'propertyphotosuploadimagesofyourproperty', 'q14_q14_fileupload12', 'fileupload12');
+          const photoValue = pick('photos', 'photo', 'image', 'propertyphotos', 'propertyphotosuploadimagesofyourproperty', 'q14_fileupload12', 'q14_q14_fileupload12', 'fileupload12');
           const photoList = [];
           const addPhotoUrls = (value, depth = 0) => {
             if (value == null || depth > 10) return;
@@ -92,19 +92,19 @@ jobs:
 
           const property = {
             id: pick('id', 'submissionid', 'submissionID'),
-            title: pick('title', 'propertytitle', 'q7_q7_textbox5'),
-            listingType: pick('listingtype', 'listing_type', 'purpose', 'propertylistingtype', 'q5_q5_radio3'),
-            propertyType: pick('propertytype', 'property_type', 'type', 'q6_q6_dropdown4'),
-            location: pick('location', 'locationareaorcity', 'locationareacity', 'q8_q8_textbox6'),
-            price: pick('priceorrent', 'price_or_rent', 'price', 'expectedpriceormonthlyrentinlocalcurrency', 'q9_q9_number7'),
-            bhk: pick('bhk', 'bedrooms', 'numberofbedroomsifapplicable', 'q11_q11_number9'),
-            area: pick('size_sq_ft', 'areasqft', 'area', 'propertysize', 'q10_q10_number8'),
-            furnishing: pick('furnishing', 'furnishingstatus', 'q12_q12_radio10'),
-            description: pick('description', 'propertydescription', 'q13_q13_textarea11'),
+            title: pick('title', 'propertytitle', 'q7_textbox5', 'q7_q7_textbox5'),
+            listingType: pick('listingtype', 'listing_type', 'purpose', 'propertylistingtype', 'q5_radio3', 'q5_q5_radio3'),
+            propertyType: pick('propertytype', 'property_type', 'type', 'q6_dropdown4', 'q6_q6_dropdown4'),
+            location: pick('location', 'locationareaorcity', 'locationareacity', 'q8_textbox6', 'q8_q8_textbox6'),
+            price: pick('priceorrent', 'price_or_rent', 'price', 'expectedpriceormonthlyrentinlocalcurrency', 'q9_number7', 'q9_q9_number7'),
+            bhk: pick('bhk', 'bedrooms', 'numberofbedroomsifapplicable', 'q11_number9', 'q11_q11_number9'),
+            area: pick('size_sq_ft', 'areasqft', 'area', 'propertysize', 'q10_number8', 'q10_q10_number8'),
+            furnishing: pick('furnishing', 'furnishingstatus', 'q12_radio10', 'q12_q12_radio10'),
+            description: pick('description', 'propertydescription', 'q13_textarea11', 'q13_q13_textarea11'),
             photos: uniquePhotos,
             image: uniquePhotos[0] || '',
-            phone: pick('phone', 'phonenumber', 'q3_q3_phone1'),
-            email: pick('email', 'emailaddress', 'q4_q4_email2'),
+            phone: pick('phone', 'phonenumber', 'q3_phone1', 'q3_q3_phone1'),
+            email: pick('email', 'emailaddress', 'q4_email2', 'q4_q4_email2'),
             submittedAt: new Date().toISOString()
           };
 
