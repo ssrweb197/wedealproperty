@@ -28,8 +28,10 @@ jobs:
             if (text) properties = JSON.parse(text);
           }
 
+          // Accept a nested `property` object to stay within GitHub's 10 top-level client_payload property limit.
+          const data = payload.property && typeof payload.property === 'object' ? payload.property : payload;
           const cleanKey = k => String(k || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-          const all = Object.assign({}, payload, payload.answers || {}, payload.fields || {});
+          const all = Object.assign({}, data, data.answers || {}, data.fields || {});
           const pick = (...names) => {
             for (const name of names) {
               const wanted = cleanKey(name);
