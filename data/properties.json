@@ -223,5 +223,24 @@
     },
     "email": "ssraoh@gmail.com",
     "submittedAt": "2026-10-09T09:23:13.254Z"
+  },
+  {
+    "id": "6673504421026092700",
+    "title": "Lease",
+    "listingType": "Lease",
+    "propertyType": "Plot/Land",
+    "location": "Hyderabad ",
+    "price": "60000",
+    "bhk": "",
+    "area": "2000",
+    "furnishing": "",
+    "description": "Ready to move ",
+    "photos": [],
+    "image": "",
+    "phone": {
+      "full": "(994) 652-6885"
+    },
+    "email": "ssraohd@gmail.com",
+    "submittedAt": "2026-10-09T10:21:06.540Z"
   }
 ]
