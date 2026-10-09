@@ -28,10 +28,18 @@ jobs:
             if (text) properties = JSON.parse(text);
           }
 
-          // Accept a nested `property` object to stay within GitHub's 10 top-level client_payload property limit.
+          // Accept nested property data and raw Jotform fields at either payload level.
           const data = payload.property && typeof payload.property === 'object' ? payload.property : payload;
           const cleanKey = k => String(k || '').toLowerCase().replace(/[^a-z0-9]/g, '');
-          const all = Object.assign({}, data, data.answers || {}, data.fields || {});
+          const all = Object.assign(
+            {},
+            payload,
+            payload.answers || {},
+            payload.fields || {},
+            data,
+            data.answers || {},
+            data.fields || {}
+          );
           const pick = (...names) => {
             for (const name of names) {
               const wanted = cleanKey(name);
@@ -44,31 +52,44 @@ jobs:
             return '';
           };
 
-          const photoValue = pick('photos','photo','image','propertyphotos','propertyphotosuploadimagesofyourproperty');
+          const photoValue = pick('photos', 'photo', 'image', 'propertyphotos', 'propertyphotosuploadimagesofyourproperty', 'q14_q14_fileupload12');
           const photoList = Array.isArray(photoValue)
-            ? photoValue
+            ? photoValue.map(x => typeof x === 'string' ? x : (x && (x.url || x.name)) || '').filter(Boolean)
             : String(photoValue || '').split(/[,\n]/).map(x => x.trim()).filter(Boolean);
 
           const property = {
-            id: pick('id','submissionid') || String(Date.now()),
-            title: pick('title','propertytitle'),
-            listingType: pick('listingtype','listing_type','purpose','propertylistingtype'),
-            propertyType: pick('propertytype','property_type','type'),
-            location: pick('location','locationareaorcity','locationareacity'),
-            price: pick('priceorrent','price_or_rent','price','expectedpriceormonthlyrentinlocalcurrency'),
-            bhk: pick('bhk','bedrooms','numberofbedroomsifapplicable'),
-            area: pick('size_sq_ft','areasqft','area','propertysize'),
-            furnishing: pick('furnishing','furnishingstatus'),
-            description: pick('description','propertydescription'),
+            id: pick('id', 'submissionid', 'submissionID'),
+            title: pick('title', 'propertytitle', 'q7_q7_textbox5'),
+            listingType: pick('listingtype', 'listing_type', 'purpose', 'propertylistingtype', 'q5_q5_radio3'),
+            propertyType: pick('propertytype', 'property_type', 'type', 'q6_q6_dropdown4'),
+            location: pick('location', 'locationareaorcity', 'locationareacity', 'q8_q8_textbox6'),
+            price: pick('priceorrent', 'price_or_rent', 'price', 'expectedpriceormonthlyrentinlocalcurrency', 'q9_q9_number7'),
+            bhk: pick('bhk', 'bedrooms', 'numberofbedroomsifapplicable', 'q11_q11_number9'),
+            area: pick('size_sq_ft', 'areasqft', 'area', 'propertysize', 'q10_q10_number8'),
+            furnishing: pick('furnishing', 'furnishingstatus', 'q12_q12_radio10'),
+            description: pick('description', 'propertydescription', 'q13_q13_textarea11'),
             photos: photoList,
             image: photoList[0] || '',
-            phone: pick('phone','phonenumber'),
-            email: pick('email','emailaddress'),
+            phone: pick('phone', 'phonenumber', 'q3_q3_phone1'),
+            email: pick('email', 'emailaddress', 'q4_q4_email2'),
             submittedAt: new Date().toISOString()
           };
 
+          // Do not publish an empty test submission as a property listing.
+          if (!String(property.title || '').trim() || !String(property.location || '').trim()) {
+            throw new Error('Property title/location missing in GitHub dispatch payload. Check that Zoho Flow sends the mapped Jotform values.');
+          }
+          if (!property.id) property.id = String(Date.now());
+
           properties.push(property);
           fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
+          console.log('Saved property listing:', JSON.stringify({
+            id: property.id,
+            title: property.title,
+            location: property.location,
+            hasPhone: Boolean(String(property.phone || '').trim()),
+            hasEmail: Boolean(String(property.email || '').trim())
+          }));
           NODE
 
       - name: Commit property listing
