@@ -174,8 +174,10 @@
     "area": "1500",
     "furnishing": "",
     "description": "Ready to move",
-    "photos": [],
-    "image": "",
+    "photos": [
+      "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674424761027823216/images%20%2849%29.jpeg"
+    ],
+    "image": "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674424761027823216/images%20%2849%29.jpeg",
     "phone": {
       "full": "(956) 328-8458"
     },
