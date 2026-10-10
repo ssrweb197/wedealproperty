@@ -131,7 +131,7 @@ jobs:
             properties.push(property);
             console.log('Added new property submission:', property.id);
           }
-          fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\\n');
+          fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
           console.log('Incoming payload keys:', Object.keys(payload || {}));
           console.log('Received title/location:', JSON.stringify({title: property.title, location: property.location}));
           console.log('Saved property listing:', JSON.stringify({
