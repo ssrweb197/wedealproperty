@@ -116,6 +116,9 @@ jobs:
 
           properties.push(property);
           fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
+          console.log('Incoming payload keys:', Object.keys(payload || {}));
+          console.log('Incoming property data:', JSON.stringify(data));
+          console.log('Mapped title/location:', JSON.stringify({title: property.title, location: property.location}));
           console.log('Saved property listing:', JSON.stringify({
             id: property.id,
             title: property.title,
