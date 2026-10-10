@@ -111,8 +111,10 @@
     "area": "1500",
     "furnishing": "",
     "description": "Ready to occupy ",
-    "photos": [],
-    "image": "",
+    "photos": [
+      "https://www.jotform.com/uploads/ssraoh331/262791670572061/6673469821023857214/images%20%2845%29%20%281%29.jpeg"
+    ],
+    "image": "https://www.jotform.com/uploads/ssraoh331/262791670572061/6673469821023857214/images%20%2845%29%20%281%29.jpeg",
     "phone": {
       "full": "(994) 994-4668"
     },
@@ -130,8 +132,10 @@
     "area": "2000",
     "furnishing": "",
     "description": "Ready to move ",
-    "photos": [],
-    "image": "",
+    "photos": [
+      "https://www.jotform.com/uploads/ssraoh331/262791670572061/6673504421026092700/images%20%2846%29.jpeg"
+    ],
+    "image": "https://www.jotform.com/uploads/ssraoh331/262791670572061/6673504421026092700/images%20%2846%29.jpeg",
     "phone": {
       "full": "(994) 652-6885"
     },
