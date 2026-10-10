@@ -53,7 +53,7 @@ jobs:
             }
             for (const [key, child] of Object.entries(value)) {
               if (child && typeof child === 'object') flattenAnswers(child, depth + 1);
-              else if (child !== undefined && child !== null && /^q\\d+_/i.test(key)) all[key] = child;
+              else if (child !== undefined && child !== null && /^q\d+_/i.test(key)) all[key] = child;
             }
           };
           flattenAnswers(payload);
