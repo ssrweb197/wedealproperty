@@ -114,8 +114,24 @@ jobs:
           }
           if (!property.id) property.id = String(Date.now());
 
-          properties.push(property);
-          fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\n');
+          // Upsert by Jotform submission ID so webhook retries/tests do not create duplicate cards.
+          const existingIndex = properties.findIndex(p => String(p.id || '') === String(property.id || ''));
+          if (existingIndex >= 0) {
+            const existing = properties[existingIndex];
+            for (const [key, value] of Object.entries(property)) {
+              const empty = value === undefined || value === null || (typeof value === 'string' && !value.trim()) || (Array.isArray(value) && value.length === 0);
+              if (!empty) existing[key] = value;
+            }
+            const mergedPhotos = [...new Set([...(Array.isArray(existing.photos) ? existing.photos : []), ...uniquePhotos])];
+            existing.photos = mergedPhotos;
+            if (!existing.image && mergedPhotos.length) existing.image = mergedPhotos[0];
+            properties[existingIndex] = existing;
+            console.log('Updated existing property submission:', property.id);
+          } else {
+            properties.push(property);
+            console.log('Added new property submission:', property.id);
+          }
+          fs.writeFileSync(path, JSON.stringify(properties, null, 2) + '\\n');
           console.log('Incoming payload keys:', Object.keys(payload || {}));
           console.log('Received title/location:', JSON.stringify({title: property.title, location: property.location}));
           console.log('Saved property listing:', JSON.stringify({
