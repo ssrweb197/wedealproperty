@@ -75,8 +75,10 @@ jobs:
             if (value == null || depth > 10) return;
             if (Array.isArray(value)) { value.forEach(v => addPhotoUrls(v, depth + 1)); return; }
             if (typeof value === 'object') {
-              for (const key of ['url', 'download_url', 'downloadUrl', 'file_url', 'fileUrl', 'answer', 'value', 'files']) {
-                if (value[key] !== undefined) addPhotoUrls(value[key], depth + 1);
+              // Walk every nested property because Zoho/Jotform may expose the upload
+              // under a generated field key (for example q14_fileupload12), not "photos".
+              for (const child of Object.values(value)) {
+                if (child !== undefined && child !== null) addPhotoUrls(child, depth + 1);
               }
               return;
             }
