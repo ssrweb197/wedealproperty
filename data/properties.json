@@ -217,9 +217,9 @@
     "furnishing": "",
     "description": "ready",
     "photos": [
-      "images/apartment-sample.jpg"
+      "images/apartment-sample.svg"
     ],
-    "image": "images/apartment-sample.jpg",
+    "image": "images/apartment-sample.svg",
     "phone": {
       "full": "(994) 685-7952"
     },

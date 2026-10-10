@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="640" viewBox="0 0 960 640">
+<defs>
+ <linearGradient id="sky" x2="0" y2="1"><stop stop-color="#72b9f4"/><stop offset="1" stop-color="#e4f3ff"/></linearGradient>
+ <linearGradient id="front" x2="1" y2="1"><stop stop-color="#f8f7f2"/><stop offset="1" stop-color="#d7d9d9"/></linearGradient>
+ <linearGradient id="side" x2="1" y2="0"><stop stop-color="#c8ced2"/><stop offset="1" stop-color="#aeb7be"/></linearGradient>
+ <linearGradient id="glass" x2="0" y2="1"><stop stop-color="#9bd7f2"/><stop offset="1" stop-color="#3b6c8a"/></linearGradient>
+</defs>
+<rect width="960" height="640" fill="url(#sky)"/>
+<circle cx="790" cy="100" r="46" fill="#fff" opacity=".35"/>
+<path d="M0 450 Q180 410 330 450 T650 438 T960 425 V560 H0Z" fill="#8bb99b" opacity=".7"/>
+<path d="M0 555 L960 510 V640 H0Z" fill="#6c767d"/>
+<path d="M0 587 L960 547" stroke="#f6f1d7" stroke-width="5" stroke-dasharray="40 30"/>
+<!-- side of apartment block -->
+<path d="M188 178 L380 111 L380 505 L188 536Z" fill="url(#side)" stroke="#89959d" stroke-width="2"/>
+<!-- main facade -->
+<path d="M380 111 L774 164 L774 493 L380 505Z" fill="url(#front)" stroke="#bbc1c4" stroke-width="2"/>
+<!-- roof cap -->
+<path d="M168 164 L374 91 L791 145 L774 164 L380 111 L188 178Z" fill="#fdfdfb"/>
+<path d="M380 111 L774 164 L774 187 L380 132Z" fill="#d9d9d2"/>
+<!-- wood accent column -->
+<path d="M554 135 L615 143 L615 500 L554 501Z" fill="#c99a68"/>
+<path d="M560 149 L609 155 L609 493 L560 494Z" fill="#d7ad7f"/>
+<!-- floors and windows front -->
+<g stroke="#c3c8cb" stroke-width="3">
+ <path d="M380 206 L774 248 M380 300 L774 331 M380 392 L774 411"/>
+ <path d="M380 132 L380 505"/>
+</g>
+<g>
+ <g fill="url(#glass)" stroke="#596c78" stroke-width="3">
+  <rect x="407" y="151" width="56" height="46"/><rect x="479" y="160" width="55" height="44"/><rect x="633" y="177" width="57" height="44"/><rect x="704" y="186" width="45" height="43"/>
+  <rect x="407" y="228" width="56" height="52"/><rect x="479" y="235" width="55" height="52"/><rect x="633" y="259" width="57" height="45"/><rect x="704" y="266" width="45" height="46"/>
+  <rect x="407" y="320" width="56" height="55"/><rect x="479" y="325" width="55" height="55"/><rect x="633" y="348" width="57" height="42"/><rect x="704" y="354" width="45" height="42"/>
+  <rect x="407" y="410" width="56" height="58"/><rect x="479" y="412" width="55" height="58"/><rect x="633" y="421" width="57" height="48"/><rect x="704" y="425" width="45" height="43"/>
+ </g>
+ <g stroke="#eef5f8" stroke-width="3" opacity=".9">
+  <path d="M435 151 V197 M507 160 V204 M660 177 V221 M727 186 V229 M435 228 V280 M507 235 V287 M660 259 V304 M727 266 V312 M435 320 V375 M507 325 V380 M660 348 V390 M727 354 V396"/>
+ </g>
+</g>
+<!-- balcony slabs and glass -->
+<g stroke="#647883" stroke-width="3" fill="url(#glass)" fill-opacity=".55">
+ <path d="M392 210 L545 226 L545 235 L392 220Z" fill="#fdfdfb" stroke="#b8bdc0"/>
+ <path d="M392 215 L545 231 L545 252 L392 236Z"/>
+ <path d="M392 304 L545 315 L545 324 L392 315Z" fill="#fdfdfb" stroke="#b8bdc0"/>
+ <path d="M392 312 L545 320 L545 343 L392 333Z"/>
+ <path d="M392 396 L545 404 L545 414 L392 406Z" fill="#fdfdfb" stroke="#b8bdc0"/>
+ <path d="M392 403 L545 411 L545 434 L392 426Z"/>
+</g>
+<g fill="#e7e7e1">
+ <path d="M174 259 L200 252 L200 267 L174 275Z"/><path d="M174 359 L200 352 L200 367 L174 375Z"/><path d="M174 459 L200 452 L200 467 L174 475Z"/>
+</g>
+<!-- entrance and pillars -->
+<path d="M188 536 L774 493 L774 560 L188 583Z" fill="#e4e3dc"/>
+<path d="M240 527 L240 575 L264 574 L264 523Z M335 512 L335 571 L359 570 L359 509Z M620 501 L620 550 L644 549 L644 499Z M731 494 L731 543 L751 542 L751 492Z" fill="#f8f7f2"/>
+<path d="M263 530 L332 525 L332 572 L263 574Z" fill="#3c5968"/>
+<path d="M267 535 L328 530 L328 569 L267 571Z" fill="url(#glass)"/>
+<path d="M264 530 L264 574 M296 533 L296 572 M328 530 L328 569" stroke="#eaf3f7" stroke-width="3"/>
+<!-- garden -->
+<g>
+ <path d="M0 552 L185 535 L185 594 L0 610Z" fill="#d5b18b"/>
+ <path d="M0 555 L185 538 L185 551 L0 570Z" fill="#f7eee2"/>
+ <g fill="#357d4c">
+  <circle cx="97" cy="504" r="48"/><circle cx="61" cy="523" r="34"/><circle cx="126" cy="523" r="36"/>
+ </g>
+ <g fill="#54a66a"><circle cx="91" cy="488" r="30"/><circle cx="123" cy="510" r="27"/><circle cx="59" cy="511" r="25"/></g>
+ <path d="M97 526 L99 568" stroke="#7b593d" stroke-width="12"/>
+ <g fill="#34794a"><circle cx="837" cy="507" r="46"/><circle cx="802" cy="522" r="30"/><circle cx="869" cy="523" r="31"/></g>
+ <g fill="#62ad70"><circle cx="830" cy="486" r="28"/><circle cx="863" cy="505" r="28"/></g>
+ <path d="M837 530 L835 552" stroke="#7b593d" stroke-width="11"/>
+ <g fill="#2c7c4e">
+  <circle cx="216" cy="573" r="16"/><circle cx="284" cy="570" r="18"/><circle cx="401" cy="560" r="16"/><circle cx="474" cy="555" r="17"/><circle cx="548" cy="552" r="16/><circle cx="680" cy="542" r="16"/>
+ </g>
+</g>
+<path d="M0 608 L960 565 V640 H0Z" fill="#c5c9cc"/>
+<path d="M0 610 L960 567" stroke="#fff" stroke-width="4" opacity=".7"/>
+</svg>
