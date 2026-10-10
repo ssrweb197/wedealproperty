@@ -67,7 +67,7 @@
  <g fill="#62ad70"><circle cx="830" cy="486" r="28"/><circle cx="863" cy="505" r="28"/></g>
  <path d="M837 530 L835 552" stroke="#7b593d" stroke-width="11"/>
  <g fill="#2c7c4e">
-  <circle cx="216" cy="573" r="16"/><circle cx="284" cy="570" r="18"/><circle cx="401" cy="560" r="16"/><circle cx="474" cy="555" r="17"/><circle cx="548" cy="552" r="16/><circle cx="680" cy="542" r="16"/>
+  <circle cx="216" cy="573" r="16"/><circle cx="284" cy="570" r="18"/><circle cx="401" cy="560" r="16"/><circle cx="474" cy="555" r="17"/><circle cx="548" cy="552" r="16"/><circle cx="680" cy="542" r="16"/>
  </g>
 </g>
 <path d="M0 608 L960 565 V640 H0Z" fill="#c5c9cc"/>
