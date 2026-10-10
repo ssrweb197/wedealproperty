@@ -143,57 +143,6 @@
     "submittedAt": "2026-10-09T10:21:06.540Z"
   },
   {
-    "id": "1791628051761",
-    "title": "Apt",
-    "listingType": "",
-    "propertyType": "",
-    "location": "Hyderabad ",
-    "price": "",
-    "bhk": "",
-    "area": "",
-    "furnishing": "",
-    "description": "",
-    "photos": [],
-    "image": "",
-    "phone": "",
-    "email": "",
-    "submittedAt": "2026-10-10T10:27:31.756Z"
-  },
-  {
-    "id": "1791628845243",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "",
-    "bhk": "",
-    "area": "",
-    "furnishing": "",
-    "description": "",
-    "photos": [],
-    "image": "",
-    "phone": "",
-    "email": "",
-    "submittedAt": "2026-10-10T10:40:45.187Z"
-  },
-  {
-    "id": "6674336301027117946",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "20000000",
-    "bhk": "",
-    "area": "5000",
-    "furnishing": "",
-    "description": "",
-    "photos": [],
-    "image": "",
-    "phone": "",
-    "email": "",
-    "submittedAt": "2026-10-10T10:56:08.799Z"
-  },
-  {
     "id": "6674336301027117946",
     "title": "Apt",
     "listingType": "Sell",
@@ -204,84 +153,10 @@
     "area": "5000",
     "furnishing": "",
     "description": "Apt",
-    "photos": [],
-    "image": "",
-    "phone": {
-      "full": "(832) 812-3430"
-    },
-    "email": "likhithhebbare@gmail.com",
-    "submittedAt": "2026-10-10T11:02:40.300Z"
-  },
-  {
-    "id": "6674336301027117946",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "20000000",
-    "bhk": "",
-    "area": "5000",
-    "furnishing": "",
-    "description": "Apt",
-    "photos": [],
-    "image": "",
-    "phone": {
-      "full": "(832) 812-3430"
-    },
-    "email": "likhithhebbare@gmail.com",
-    "submittedAt": "2026-10-10T11:10:55.612Z"
-  },
-  {
-    "id": "6674336301027117946",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "20000000",
-    "bhk": "",
-    "area": "5000",
-    "furnishing": "",
-    "description": "Apt",
-    "photos": [],
-    "image": "",
-    "phone": {
-      "full": "(832) 812-3430"
-    },
-    "email": "likhithhebbare@gmail.com",
-    "submittedAt": "2026-10-10T11:13:01.161Z"
-  },
-  {
-    "id": "6674336301027117946",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "20000000",
-    "bhk": "",
-    "area": "5000",
-    "furnishing": "",
-    "description": "Apt",
-    "photos": [],
-    "image": "",
-    "phone": {
-      "full": "(832) 812-3430"
-    },
-    "email": "likhithhebbare@gmail.com",
-    "submittedAt": "2026-10-10T11:14:37.096Z"
-  },
-  {
-    "id": "6674336301027117946",
-    "title": "Apt",
-    "listingType": "Sell",
-    "propertyType": "Apartment/Flat",
-    "location": "Hyderabad ",
-    "price": "20000000",
-    "bhk": "",
-    "area": "5000",
-    "furnishing": "",
-    "description": "Apt",
-    "photos": [],
-    "image": "",
+    "photos": [
+      "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674336301027117946/taiyo-service-apartment-ho-khue-architects_1.jpg"
+    ],
+    "image": "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674336301027117946/taiyo-service-apartment-ho-khue-architects_1.jpg",
     "phone": {
       "full": "(832) 812-3430"
     },
