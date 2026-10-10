@@ -195,8 +195,10 @@
     "area": "2500",
     "furnishing": "",
     "description": "Ready",
-    "photos": [],
-    "image": "",
+    "photos": [
+      "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674450681022462658/images%20%2850%29.jpeg"
+    ],
+    "image": "https://www.jotform.com/uploads/ssraoh331/262791670572061/6674450681022462658/images%20%2850%29.jpeg",
     "phone": {
       "full": "(652) 388-9888"
     },
